@@ -1,17 +1,27 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
+    static int[] secretCode = new int[3];
+
     public static void main(String[] args) {
         System.out.println("게임을 시작합니다.");
+
         while (true) {
-
-            // NeedToImplement MainAlgorithm
-
+            makeSecretCode(secretCode);
             if (!askNewGame()) {
                 break;
             }
+        }
+    }
+
+    public static void makeSecretCode(int[] secretCode) {
+        Random random = new Random();
+        for (int i = 0; i < 3; i++) {
+            secretCode[i] = random.nextInt(10);
+            System.out.println(secretCode[i]);
         }
     }
 
@@ -30,7 +40,6 @@ public class Main {
                 System.out.println("게임을 종료합니다.");
                 return false;
             }
-
             System.out.println("입력이 잘못되었습니다.");
         }
     }

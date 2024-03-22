@@ -22,24 +22,31 @@ public class Main {
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
             secretCode[i] = random.nextInt(10);
-            System.out.println(secretCode[i]);
         }
     }
 
-    public static boolean checkInputValidation(String input) {
-        //todo
-        return true;
+    public static int checkInputValidation(String input) {
+        try {
+            int userGuess = Integer.parseInt(input);
+            if (userGuess >= 100 && userGuess < 1000) {
+                return userGuess;
+            }
+            return -1;
+        }
+        catch (Exception e) {
+            return -1;
+        }
     }
 
     public static int getUserGuess() {
         System.out.println("숫자를 입력해주세요.");
-        String userGuess = scanner.nextLine();
-        while (!checkInputValidation(userGuess)) {
+        int userGuess = checkInputValidation(scanner.nextLine());
+        while (userGuess == -1) {
             System.out.println("입력이 잘못되었습니다.");
             System.out.println("세자리 숫자를 입력해주세요.");
-            userGuess = scanner.nextLine();
+            userGuess = checkInputValidation(scanner.nextLine());
         }
-        return Integer.parseInt(userGuess);
+        return userGuess;
     }
 
     public static boolean checkUserGuess(int userGuess) {

@@ -9,12 +9,11 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("게임을 시작합니다.");
 
-        while (true) {
+        boolean doNewGame = true;
+        while (doNewGame) {
             makeSecretCode();
             runGame();
-            if (!askNewGame()) {
-                break;
-            }
+            doNewGame = askNewGame();
         }
     }
 
@@ -41,7 +40,7 @@ public class Main {
         System.out.println("숫자를 입력해주세요.");
         int userGuess = checkInputValidation(scanner.nextLine());
         while (userGuess == -1) {
-            System.out.println("입력이 잘못되었습니다.");
+            System.out.println("[Error] 입력이 잘못되었습니다.");
             System.out.println("세자리 숫자를 입력해주세요.");
             userGuess = checkInputValidation(scanner.nextLine());
         }
@@ -106,7 +105,7 @@ public class Main {
                 System.out.println("게임을 종료합니다.");
                 return false;
             }
-            System.out.println("입력이 잘못되었습니다.");
+            System.out.println("[Error] 입력이 잘못되었습니다.");
         }
     }
 }

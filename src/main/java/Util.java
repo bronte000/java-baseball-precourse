@@ -9,12 +9,9 @@ public class Util {
     }
 
     public static int checkInputValidation(String input) {
+        if (input.length() != 3) return -1;
         try {
-            int userGuess = Integer.parseInt(input);
-            if (userGuess >= 100 && userGuess < 1000) {
-                return userGuess;
-            }
-            return -1;
+            return Integer.parseInt(input);
         } catch (Exception e) {
             return -1;
         }

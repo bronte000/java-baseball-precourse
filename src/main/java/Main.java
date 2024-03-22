@@ -32,8 +32,7 @@ public class Main {
                 return userGuess;
             }
             return -1;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return -1;
         }
     }
@@ -50,8 +49,36 @@ public class Main {
     }
 
     public static boolean checkUserGuess(int userGuess) {
-        //todo
-        return true;
+        int strike = 0;
+        int ball = 0;
+        for (int i = 2; i >= 0; i--) {
+            int num = userGuess % 10;
+            if (num == secretCode[i]) {
+                strike++;
+            }
+            if (num == secretCode[(i + 1) % 3] || num == secretCode[(i + 2) % 3]) {
+                ball++;
+            }
+            userGuess = userGuess / 10;
+        }
+        printResult(strike, ball);
+        return strike == 3;
+    }
+
+    public static void printResult(int strike, int ball) {
+        if (strike == 0 && ball == 0) {
+            System.out.println("Nothing");
+            return;
+        }
+        if (strike == 0) {
+            System.out.printf("%d Ball%n", ball);
+            return;
+        }
+        if (ball == 0) {
+            System.out.printf("%d Strike%n", strike);
+            return;
+        }
+        System.out.printf("%d Strike, %d Ball%n", strike, ball);
     }
 
     public static void runGame() {

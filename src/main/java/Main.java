@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -11,38 +10,19 @@ public class Main {
 
         boolean doNewGame = true;
         while (doNewGame) {
-            makeSecretCode();
+            Util.makeSecretCode(secretCode);
             runGame();
             doNewGame = askNewGame();
         }
     }
 
-    public static void makeSecretCode() {
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            secretCode[i] = random.nextInt(10);
-        }
-    }
-
-    public static int checkInputValidation(String input) {
-        try {
-            int userGuess = Integer.parseInt(input);
-            if (userGuess >= 100 && userGuess < 1000) {
-                return userGuess;
-            }
-            return -1;
-        } catch (Exception e) {
-            return -1;
-        }
-    }
-
     public static int getUserGuess() {
         System.out.println("숫자를 입력해주세요.");
-        int userGuess = checkInputValidation(scanner.nextLine());
+        int userGuess = Util.checkInputValidation(scanner.nextLine());
         while (userGuess == -1) {
             System.out.println("[Error] 입력이 잘못되었습니다.");
             System.out.println("세자리 숫자를 입력해주세요.");
-            userGuess = checkInputValidation(scanner.nextLine());
+            userGuess = Util.checkInputValidation(scanner.nextLine());
         }
         return userGuess;
     }
@@ -60,25 +40,10 @@ public class Main {
             }
             userGuess = userGuess / 10;
         }
-        printResult(strike, ball);
+        Util.printResult(strike, ball);
         return strike == 3;
     }
 
-    public static void printResult(int strike, int ball) {
-        if (strike == 0 && ball == 0) {
-            System.out.println("Nothing");
-            return;
-        }
-        if (strike == 0) {
-            System.out.printf("%d Ball%n", ball);
-            return;
-        }
-        if (ball == 0) {
-            System.out.printf("%d Strike%n", strike);
-            return;
-        }
-        System.out.printf("%d Strike, %d Ball%n", strike, ball);
-    }
 
     public static void runGame() {
         boolean gameFinished = false;

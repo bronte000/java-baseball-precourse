@@ -10,19 +10,51 @@ public class Main {
         System.out.println("게임을 시작합니다.");
 
         while (true) {
-            makeSecretCode(secretCode);
+            makeSecretCode();
+            runGame();
             if (!askNewGame()) {
                 break;
             }
         }
     }
 
-    public static void makeSecretCode(int[] secretCode) {
+    public static void makeSecretCode() {
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
             secretCode[i] = random.nextInt(10);
             System.out.println(secretCode[i]);
         }
+    }
+
+    public static boolean checkInputValidation(String input) {
+        //todo
+        return true;
+    }
+
+    public static int getUserGuess() {
+        System.out.println("숫자를 입력해주세요.");
+        String userGuess = scanner.nextLine();
+        while (!checkInputValidation(userGuess)) {
+            System.out.println("입력이 잘못되었습니다.");
+            System.out.println("세자리 숫자를 입력해주세요.");
+            userGuess = scanner.nextLine();
+        }
+        return Integer.parseInt(userGuess);
+    }
+
+    public static boolean checkUserGuess(int userGuess) {
+        //todo
+        return true;
+    }
+
+    public static void runGame() {
+        boolean gameFinished = false;
+        while (!gameFinished) {
+            int userGuess = getUserGuess();
+            gameFinished = checkUserGuess(userGuess);
+        }
+        System.out.println("3개의 숫자를 모두 맞히셨습니다!");
+        System.out.println("게임 끝!");
     }
 
     public static boolean askNewGame() {
